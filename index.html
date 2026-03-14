@@ -9,13 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Palette inspirée d'un CV sombre, croisée avec de l'ancien */
-            --bg-dark: #0f0c0a; /* Noir très profond, pointe de brun */
-            --wood-card: rgba(36, 25, 20, 0.7); /* Fond de carte translucide */
+            --bg-dark: #0f0c0a;
+            --wood-card: rgba(36, 25, 20, 0.7);
             --wood-border: #4a3525;
-            --gold-bright: #d4af37; /* Or éclatant */
-            --gold-glow: rgba(212, 175, 55, 0.3); /* Lueur dorée (façon néon de CV) */
-            --text-light: #e8dfce; /* Blanc cassé / parchemin */
+            --gold-bright: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --text-light: #e8dfce;
             --text-muted: #a89f91;
         }
 
@@ -40,7 +39,6 @@
             color: var(--gold-bright);
         }
 
-        /* Hero Section avec 1.jpg en fond */
         header {
             position: relative;
             height: 100vh;
@@ -91,7 +89,6 @@
             background: rgba(212, 175, 55, 0.1);
         }
 
-        /* Navigation */
         nav {
             background-color: rgba(15, 12, 10, 0.95);
             padding: 20px 0;
@@ -107,6 +104,7 @@
             display: flex;
             justify-content: center;
             gap: 50px;
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -123,7 +121,6 @@
             text-shadow: 0 0 8px var(--gold-glow);
         }
 
-        /* Sections */
         section {
             padding: 100px 10%;
             max-width: 1400px;
@@ -135,6 +132,7 @@
             font-size: 3rem;
             margin-bottom: 60px;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .section-title::after {
@@ -155,7 +153,6 @@
             color: var(--text-muted);
         }
 
-        /* Ligne du temps (Généalogie) */
         .timeline {
             position: relative;
             max-width: 800px;
@@ -230,7 +227,6 @@
             color: var(--text-muted);
         }
 
-        /* Boîte de recherches */
         .history-box {
             background: var(--wood-card);
             padding: 50px;
@@ -251,11 +247,11 @@
             margin-bottom: 20px;
         }
 
-        /* Galerie / Photos */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 40px;
+            align-items: start;
         }
 
         .card {
@@ -275,31 +271,25 @@
         }
 
         .card-img-container {
-            height: 300px;
+            width: 100%;
             overflow: hidden;
             position: relative;
-        }
-
-        .card-img-container::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 30%;
-            background: linear-gradient(to top, var(--wood-card), transparent);
+            border-bottom: 1px solid var(--wood-border);
         }
 
         .card img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            display: block;
             transition: transform 0.6s ease;
         }
 
         .card:hover img {
             transform: scale(1.05);
         }
+
+        .modern-img { filter: none; }
+        .vintage-img { filter: sepia(20%) contrast(110%); }
 
         .card-content {
             padding: 30px;
@@ -336,23 +326,26 @@
             color: var(--gold-bright);
         }
 
-        .btn-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            color: var(--bg-dark);
+        .btn-archives {
+            display: inline-block;
             background-color: var(--gold-bright);
+            color: var(--bg-dark);
+            padding: 12px 30px;
             text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
             font-weight: 600;
+            border: 2px solid var(--gold-bright);
+            transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s;
+            border-radius: 4px;
         }
 
-        .btn-link:hover {
-            background-color: var(--text-light);
-            box-shadow: 0 0 15px var(--gold-glow);
+        .btn-archives:hover {
+            background-color: transparent;
+            color: var(--gold-bright);
+            box-shadow: 0 0 20px var(--gold-glow);
         }
 
         /* Cadastre Section */
@@ -362,16 +355,137 @@
             padding: 40px;
             border: 1px solid var(--wood-border);
             background: var(--wood-card);
+            border-radius: 4px;
         }
 
-        .cadastre-full img {
+        .cadastre-full .image-hint {
+            display: block;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: var(--gold-bright);
+            font-style: italic;
+        }
+
+        .cadastre-full img.zoomable {
             max-width: 100%;
             height: auto;
             border: 2px solid var(--gold-bright);
             margin-bottom: 20px;
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+        
+        .cadastre-full img.zoomable:hover {
+            box-shadow: 0 0 20px var(--gold-glow);
         }
 
-        /* Footer */
+        /* Grille pour les autres sections cadastrales */
+        .cadastre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .cadastre-item {
+            background: rgba(15, 12, 10, 0.5);
+            padding: 15px;
+            border: 1px solid var(--wood-border);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .cadastre-item:hover {
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .cadastre-item img.zoomable {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border: 1px solid var(--wood-medium);
+            margin-bottom: 10px;
+        }
+
+        .cadastre-item h4 {
+            font-size: 1.1rem;
+            color: var(--gold-bright);
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Fenêtre Modale pour le Zoom */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(10, 8, 7, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+        }
+
+        .modal-content-wrapper:active {
+            cursor: grabbing;
+        }
+
+        #zoomedImage {
+            max-width: 90%;
+            max-height: 90%;
+            transition: transform 0.1s ease-out;
+            transform-origin: center center;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            border: 2px solid var(--gold-bright);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: var(--gold-bright);
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .zoom-instructions {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-light);
+            background: rgba(0,0,0,0.6);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            z-index: 2001;
+            border: 1px solid var(--wood-border);
+        }
+
         footer {
             background-color: #080605;
             color: var(--text-muted);
@@ -382,13 +496,11 @@
             font-size: 1.2rem;
         }
 
-        /* Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
         @media screen and (max-width: 768px) {
             .timeline::after { left: 20px; }
             .container-timeline { width: 100%; padding-left: 50px; padding-right: 0; }
@@ -415,8 +527,10 @@
     <nav>
         <ul>
             <li><a href="#genealogie">La Lignée</a></li>
-            <li><a href="#galerie">Galerie & Archives</a></li>
-            <li><a href="#cadastre">Plan de 1825</a></li>
+            <li><a href="#cadastre">Le Cadastre</a></li>
+            <li><a href="#photos-contemporaines">Mes Photos</a></li>
+            <li><a href="#lettres-anciennes">Lettres & Archives</a></li>
+            <li><a href="maison-fleurie/index.html">L'Héritage Fleuri</a></li>
         </ul>
     </nav>
 
@@ -454,24 +568,60 @@
         </div>
 
         <div class="history-box">
-            <h3>À la recherche de nos ancêtres (1700 - 1915)</h3>
+            <h3>À la recherche de nos ancêtres (1781 - 1915)</h3>
             <p style="margin-bottom: 15px; color: var(--text-muted);">L'histoire de notre famille dans cette maison ne s'arrête pas là. Les générations précédentes (de l'arrière-grand-mère jusqu'aux bâtisseurs d'origine de la maison) sont actuellement en cours d'identification.</p>
             <p style="color: var(--text-muted);">Des recherches historiques sont menées dans le cadastre napoléonien de 1825 et les registres anciens d'Alsace pour remonter le temps, décennie après décennie, et redonner un nom à tous nos aïeux qui ont habité et préservé cette maison à colombages au fil des siècles. Dès que les archives livreront leurs secrets, cette page sera mise à jour.</p>
         </div>
     </section>
 
-    <section id="galerie">
-        <h2 class="section-title">Vues Contemporaines & Archives</h2>
-        
+    <section id="cadastre">
+        <h2 class="section-title">Archives Cadastrales de Hermerswiller</h2>
+        <div class="cadastre-full">
+            <h3 style="margin-bottom: 15px; font-size: 2rem;">Parcelle 53 - Section E (1825)</h3>
+            <p style="margin-bottom: 10px; color: var(--text-muted); font-size: 1.1rem;">
+                Le document fondateur de notre recherche foncière. Il permet de visualiser notre parcelle telle qu'elle était délimitée au début du 19ème siècle, 44 ans après l'achèvement de la bâtisse.
+            </p>
+            <span class="image-hint">Cliquez sur les plans pour zoomer en plein écran</span>
+            
+            <img class="zoomable" src="Cadastre/5 3 P 365 21 Section E. - (1825)/FRAD067_0119NUM2360.jpg" alt="Plan cadastral napoléonien de 1825 - Section E">
+
+            <div class="cadastre-grid">
+                
+                <div class="cadastre-item">
+                    <img class="zoomable" src="Cadastre/1 3 P 365 22 Tableau d'assemblage. - (1825)/FRAD067_0119NUM2361.jpg" alt="Tableau d'assemblage">
+                    <h4>Tableau d'assemblage</h4>
+                </div>
+
+                <div class="cadastre-item">
+                    <img class="zoomable" src="Cadastre/2 3 P 365 23 Section A ; section B. - (1825)/FRAD067_0119NUM2362.jpg" alt="Section A et B">
+                    <h4>Sections A et B</h4>
+                </div>
+
+                <div class="cadastre-item">
+                    <img class="zoomable" src="Cadastre/3 3 P 365 24 Section C. - (1825)/FRAD067_0119NUM2363.jpg" alt="Section C">
+                    <h4>Section C</h4>
+                </div>
+
+                <div class="cadastre-item">
+                    <img class="zoomable" src="Cadastre/4 3 P 365 25 Section D. - (1825)/FRAD067_0119NUM2364.jpg" alt="Section D">
+                    <h4>Section D</h4>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="photos-contemporaines">
+        <h2 class="section-title">Vues Contemporaines</h2>
         <div class="gallery-grid">
 
             <div class="card">
                 <div class="card-img-container">
-                    <img src="1.jpg" alt="Vue de la rue au crépuscule">
+                    <img src="1.jpg" alt="Crépuscule sur la rue Principale" class="modern-img">
                 </div>
                 <div class="card-content">
-                    <h4>Crépuscule sur la rue Principale</h4>
-                    <p>Perspective actuelle de la maison s'intégrant dans le paysage villageois d'Hermerswiller.</p>
+                    <h4>Crépuscule sur la voie</h4>
+                    <p>Perspective actuelle de la demeure s'intégrant majestueusement dans le paysage de la rue Principale, baignée par les lueurs du soleil couchant.</p>
                     <ul>
                         <li><strong>Prise de vue :</strong> Contemporaine</li>
                         <li><strong>Auteur :</strong> Mathéo Angst</li>
@@ -481,78 +631,164 @@
 
             <div class="card">
                 <div class="card-img-container">
-                    <img src="2.jpg" alt="Détail de la façade et du nid">
+                    <img src="2.jpg" alt="Détail de la charpente" class="modern-img">
                 </div>
                 <div class="card-content">
-                    <h4>L'héritage de 1781</h4>
-                    <p>Détail de la charpente en colombages restaurée, surmontée de son emblématique nid de cigogne.</p>
+                    <h4>L'Héritage de 1781</h4>
+                    <p>Détail saisissant de l'architecture traditionnelle, révélant la solidité des colombages et l'emblématique nid de cigogne veillant sur le toit.</p>
                     <ul>
-                        <li><strong>Détail :</strong> Façade et toiture</li>
+                        <li><strong>Prise de vue :</strong> Contemporaine</li>
                         <li><strong>Auteur :</strong> Mathéo Angst</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-img-container">
-                    <img src="Delcampe lettre/1/743_001.jpg" alt="Carte postale ancienne">
-                </div>
-                <div class="card-content">
-                    <h4>Archive N°C-4352-B</h4>
-                    <p>Témoignage photographique ancien illustrant l'architecture typique du village (Format 15x10,5 cm).</p>
-                    <ul>
-                        <li><strong>Catégorie :</strong> Carte Postale</li>
-                        <li><strong>État :</strong> Non circulée</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img-container">
-                    <img src="Delcampe lettre/2/664_001.jpg" alt="Très beau plan de façade">
-                </div>
-                <div class="card-content">
-                    <h4>Tradition de l'Outre-Forêt</h4>
-                    <p>Une mise en valeur de la structure en bois traditionnelle documentée par les collectionneurs.</p>
-                    <ul>
-                        <li><strong>Localisation :</strong> Canton de Soultz</li>
-                        <li><strong>Archive :</strong> Identifiée</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-img-container">
-                    <img src="Delcampe lettre/3/036_001.jpg" alt="Carte postale ayant circulé">
-                </div>
-                <div class="card-content">
-                    <h4>Missive du passé</h4>
-                    <p>Carte postale ayant circulé, portant les traces postales d'une autre époque (Éditeur: MARAVCO).</p>
-                    <ul>
-                        <li><strong>Éditeur :</strong> MARAVCO</li>
-                        <li><strong>État :</strong> Ayant circulé</li>
-                    </ul>
-                </div>
-            </div>
-
         </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="maison-fleurie/index.html" class="btn-archives" style="font-size: 1.4rem; padding: 15px 40px;">Découvrir l'Héritage Fleuri d'Alfred Goetzmann</a>
+        </div>
+
     </section>
 
-    <section id="cadastre">
-        <h2 class="section-title">Le Cadastre Napoléonien</h2>
-        <div class="cadastre-full">
-            <h3 style="margin-bottom: 15px; font-size: 2rem;">Parcelle 53 - Section E (1825)</h3>
-            <p style="margin-bottom: 30px; color: var(--text-muted); font-size: 1.1rem;">
-                Le document fondateur de notre recherche foncière. Il permet de visualiser notre parcelle telle qu'elle était délimitée au début du 19ème siècle, 44 ans après l'achèvement de la bâtisse.
-            </p>
-            <img src="Cadastre/5 3 P 365 21 Section E. - (1825)/FRAD067_0119N_UM2360.jpg" alt="Plan cadastral napoléonien de 1825">
-            <a href="https://archives67.alsace.eu/ark:/78665/1185513.1489972/img:FRAD067_0119NUM2360" target="_blank" class="btn-link">Consulter le document original aux Archives</a>
+    <section id="lettres-anciennes">
+        <h2 class="section-title">Lettres et Archives Postales</h2>
+        <div class="gallery-grid">
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="Delcampe lettre/1/743_001.jpg" alt="Maison à colombages ancienne" class="vintage-img">
+                </div>
+                <div class="card-content">
+                    <h4>Cliché N°C-4352-B</h4>
+                    <p>Un témoignage immuable de l'esthétique rurale, figeant pour l'éternité l'âme de notre bourg d'Hermerswiller.</p>
+                    <ul>
+                        <li><strong>Époque :</strong> Non circulée</li>
+                        <li><strong>Nature :</strong> Carte Postale Originale</li>
+                        <li><strong>Registre :</strong> 2443971743</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="Delcampe lettre/2/664_001.jpg" alt="Façade traditionnelle" class="vintage-img">
+                </div>
+                <div class="card-content">
+                    <h4>L'Art de la Façade</h4>
+                    <p>Une mise en lumière exceptionnelle de la majestueuse ossature de bois, typique de la région de l'Outre-Forêt.</p>
+                    <ul>
+                        <li><strong>Lieu :</strong> Canton de Soultz-sous-Forêts</li>
+                        <li><strong>Statut :</strong> Archive historique</li>
+                        <li><strong>Registre :</strong> 154992664</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="Delcampe lettre/3/036_001.jpg" alt="Carte postale circulée" class="vintage-img">
+                </div>
+                <div class="card-content">
+                    <h4>Missive Oubliée</h4>
+                    <p>Porteuse de mots d'antan, cette carte marquée par les ans a traversé les âges depuis son expédition par les postes.</p>
+                    <ul>
+                        <li><strong>État :</strong> Ayant circulé</li>
+                        <li><strong>Éditeur :</strong> MARAVCO (1.14101)</li>
+                        <li><strong>Registre :</strong> 71917036</li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <footer>
-        <p>© 2026 - Mathéo Angst. Créé pour documenter l'histoire de notre maison familiale.</p>
+        <p>Projet de Mémoire et de Transmission — Œuvre dédiée à l'histoire du patrimoine familial par Mathéo Angst.</p>
     </footer>
+
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="zoom-instructions">Utilisez la molette pour zoomer et glissez pour explorer le plan.</div>
+        <div class="modal-content-wrapper">
+            <img id="zoomedImage" src="">
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("imageModal");
+        const img = document.getElementById("zoomedImage");
+        const triggers = document.querySelectorAll(".zoomable");
+        const closeBtn = document.querySelector(".close-modal");
+        const wrapper = document.querySelector(".modal-content-wrapper");
+
+        let scale = 1;
+        let panning = false;
+        let pointX = 0;
+        let pointY = 0;
+        let start = { x: 0, y: 0 };
+
+        // Ouvrir l'image en grand (boucle sur toutes les images avec la classe zoomable)
+        triggers.forEach(trigger => {
+            trigger.onclick = function() {
+                modal.style.display = "block";
+                img.src = this.src;
+                scale = 1;
+                pointX = 0;
+                pointY = 0;
+                setTransform();
+            }
+        });
+
+        // Fermer la fenêtre
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Gestion du Zoom (Molette de la souris)
+        wrapper.onwheel = function(e) {
+            e.preventDefault();
+            let delta = (e.wheelDelta ? e.wheelDelta : -e.deltaY);
+            if (delta > 0) {
+                scale *= 1.2; // Zoom avant
+            } else {
+                scale /= 1.2; // Zoom arrière
+            }
+            
+            // Limites du zoom
+            if (scale < 0.5) scale = 0.5;
+            if (scale > 15) scale = 15;
+            
+            setTransform();
+        }
+
+        // Gestion du déplacement (Drag & Pan)
+        wrapper.onmousedown = function(e) {
+            e.preventDefault();
+            start = { x: e.clientX - pointX, y: e.clientY - pointY };
+            panning = true;
+        }
+
+        wrapper.onmouseup = function() {
+            panning = false;
+        }
+
+        wrapper.onmouseleave = function() {
+            panning = false;
+        }
+
+        wrapper.onmousemove = function(e) {
+            e.preventDefault();
+            if (!panning) return;
+            pointX = (e.clientX - start.x);
+            pointY = (e.clientY - start.y);
+            setTransform();
+        }
+
+        function setTransform() {
+            img.style.transform = "translate(" + pointX + "px, " + pointY + "px) scale(" + scale + ")";
+        }
+    </script>
 
 </body>
 </html>
