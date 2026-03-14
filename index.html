@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison à Colombages avec Nid de Cigogne - Par Mathéo Angst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette inspirée d'un CV sombre, croisée avec de l'ancien */
+            --bg-dark: #0f0c0a; /* Noir très profond, pointe de brun */
+            --wood-card: rgba(36, 25, 20, 0.7); /* Fond de carte translucide */
+            --wood-border: #4a3525;
+            --gold-bright: #d4af37; /* Or éclatant */
+            --gold-glow: rgba(212, 175, 55, 0.3); /* Lueur dorée (façon néon de CV) */
+            --text-light: #e8dfce; /* Blanc cassé / parchemin */
+            --text-muted: #a89f91;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-light);
+            background-color: var(--bg-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            color: var(--gold-bright);
+        }
+
+        /* Hero Section avec 1.jpg en fond */
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(15, 12, 10, 0.6), rgba(15, 12, 10, 1)), url('1.jpg') center/cover no-repeat;
+            background-attachment: fixed;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            background: rgba(15, 12, 10, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 50px 80px;
+            border: 1px solid var(--gold-bright);
+            border-radius: 4px;
+            box-shadow: 0 0 30px var(--gold-glow);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .hero-content .date-badge {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 25px;
+            border: 1px solid var(--gold-bright);
+            color: var(--gold-bright);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: rgba(15, 12, 10, 0.95);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--wood-border);
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold-bright);
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            letter-spacing: 1px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: var(--gold-bright);
+            margin: 20px auto 0;
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 60px auto;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* Ligne du temps (Généalogie) */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--wood-border);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .container-timeline {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+
+        .container-timeline::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: var(--bg-dark);
+            border: 2px solid var(--gold-bright);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; }
+        .right::after { left: -8px; }
+
+        .content-timeline {
+            padding: 30px;
+            background: var(--wood-card);
+            border: 1px solid var(--wood-border);
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .content-timeline:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-bright);
+            box-shadow: 0 10px 30px var(--gold-glow);
+        }
+
+        .content-timeline h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .content-timeline span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--gold-bright);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .content-timeline p {
+            color: var(--text-muted);
+        }
+
+        /* Boîte de recherches */
+        .history-box {
+            background: var(--wood-card);
+            padding: 50px;
+            border-radius: 4px;
+            margin-top: 50px;
+            text-align: center;
+            border: 1px solid var(--wood-border);
+            transition: all 0.4s;
+        }
+
+        .history-box:hover {
+            border-color: var(--gold-bright);
+            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .history-box h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Galerie / Photos */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--wood-card);
+            border: 1px solid var(--wood-border);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold-bright);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 15px var(--gold-glow);
+        }
+
+        .card-img-container {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, var(--wood-card), transparent);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .card-content h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .card-content p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .card-content ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--wood-border);
+            padding-top: 15px;
+        }
+
+        .card-content ul li {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-content ul li strong {
+            color: var(--gold-bright);
+        }
+
+        .btn-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            color: var(--bg-dark);
+            background-color: var(--gold-bright);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-link:hover {
+            background-color: var(--text-light);
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        /* Cadastre Section */
+        .cadastre-full {
+            margin-top: 80px;
+            text-align: center;
+            padding: 40px;
+            border: 1px solid var(--wood-border);
+            background: var(--wood-card);
+        }
+
+        .cadastre-full img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid var(--gold-bright);
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #080605;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--wood-border);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .timeline::after { left: 20px; }
+            .container-timeline { width: 100%; padding-left: 50px; padding-right: 0; }
+            .left { text-align: left; }
+            .left::after, .right::after { left: 12px; }
+            .right { left: 0%; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content { padding: 30px 20px; }
+            nav ul { flex-direction: column; gap: 15px; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hero-content">
+            <h1>Maison à Colombages avec Nid de Cigogne</h1>
+            <p>Histoire d'un patrimoine familial</p>
+            <p style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;">Par Mathéo Angst</p>
+            <div class="date-badge">Achevée en 1781</div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#genealogie">La Lignée</a></li>
+            <li><a href="#galerie">Galerie & Archives</a></li>
+            <li><a href="#cadastre">Plan de 1825</a></li>
+        </ul>
+    </nav>
+
+    <section id="genealogie">
+        <h2 class="section-title">Lignée des Habitants</h2>
+        
+        <p class="intro-text">Cette bâtisse n'est pas qu'un simple lieu de résidence, c'est le berceau de notre famille depuis plusieurs siècles. De ses murs de fondation datant des années 1700-1800 jusqu'à aujourd'hui, le fil de notre histoire s'est tissé sous ce toit. Voici la lignée des générations qui y ont vécu :</p>
+
+        <div class="timeline">
+            
+            <div class="container-timeline left">
+                <div class="content-timeline">
+                    <span>Génération 1</span>
+                    <h3>Mathéo Angst</h3>
+                    <p>Né le 11 juillet 2007</p>
+                </div>
+            </div>
+
+            <div class="container-timeline right">
+                <div class="content-timeline">
+                    <span>Génération 2</span>
+                    <h3>Manuela Goetzmann</h3>
+                    <p>Née le 3 février 1979</p>
+                </div>
+            </div>
+
+            <div class="container-timeline left">
+                <div class="content-timeline">
+                    <span>Génération 3</span>
+                    <h3>Alfred Emile Goetzmann</h3>
+                    <p>Né le 14 mars 1949</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="history-box">
+            <h3>À la recherche de nos ancêtres (1700 - 1915)</h3>
+            <p style="margin-bottom: 15px; color: var(--text-muted);">L'histoire de notre famille dans cette maison ne s'arrête pas là. Les générations précédentes (de l'arrière-grand-mère jusqu'aux bâtisseurs d'origine de la maison) sont actuellement en cours d'identification.</p>
+            <p style="color: var(--text-muted);">Des recherches historiques sont menées dans le cadastre napoléonien de 1825 et les registres anciens d'Alsace pour remonter le temps, décennie après décennie, et redonner un nom à tous nos aïeux qui ont habité et préservé cette maison à colombages au fil des siècles. Dès que les archives livreront leurs secrets, cette page sera mise à jour.</p>
+        </div>
+    </section>
+
+    <section id="galerie">
+        <h2 class="section-title">Vues Contemporaines & Archives</h2>
+        
+        <div class="gallery-grid">
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="1.jpg" alt="Vue de la rue au crépuscule">
+                </div>
+                <div class="card-content">
+                    <h4>Crépuscule sur la rue Principale</h4>
+                    <p>Perspective actuelle de la maison s'intégrant dans le paysage villageois d'Hermerswiller.</p>
+                    <ul>
+                        <li><strong>Prise de vue :</strong> Contemporaine</li>
+                        <li><strong>Auteur :</strong> Mathéo Angst</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="2.jpg" alt="Détail de la façade et du nid">
+                </div>
+                <div class="card-content">
+                    <h4>L'héritage de 1781</h4>
+                    <p>Détail de la charpente en colombages restaurée, surmontée de son emblématique nid de cigogne.</p>
+                    <ul>
+                        <li><strong>Détail :</strong> Façade et toiture</li>
+                        <li><strong>Auteur :</strong> Mathéo Angst</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="Delcampe lettre/1/743_001.jpg" alt="Carte postale ancienne">
+                </div>
+                <div class="card-content">
+                    <h4>Archive N°C-4352-B</h4>
+                    <p>Témoignage photographique ancien illustrant l'architecture typique du village (Format 15x10,5 cm).</p>
+                    <ul>
+                        <li><strong>Catégorie :</strong> Carte Postale</li>
+                        <li><strong>État :</strong> Non circulée</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="Delcampe lettre/2/664_001.jpg" alt="Très beau plan de façade">
+                </div>
+                <div class="card-content">
+                    <h4>Tradition de l'Outre-Forêt</h4>
+                    <p>Une mise en valeur de la structure en bois traditionnelle documentée par les collectionneurs.</p>
+                    <ul>
+                        <li><strong>Localisation :</strong> Canton de Soultz</li>
+                        <li><strong>Archive :</strong> Identifiée</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="Delcampe lettre/3/036_001.jpg" alt="Carte postale ayant circulé">
+                </div>
+                <div class="card-content">
+                    <h4>Missive du passé</h4>
+                    <p>Carte postale ayant circulé, portant les traces postales d'une autre époque (Éditeur: MARAVCO).</p>
+                    <ul>
+                        <li><strong>Éditeur :</strong> MARAVCO</li>
+                        <li><strong>État :</strong> Ayant circulé</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cadastre">
+        <h2 class="section-title">Le Cadastre Napoléonien</h2>
+        <div class="cadastre-full">
+            <h3 style="margin-bottom: 15px; font-size: 2rem;">Parcelle 53 - Section E (1825)</h3>
+            <p style="margin-bottom: 30px; color: var(--text-muted); font-size: 1.1rem;">
+                Le document fondateur de notre recherche foncière. Il permet de visualiser notre parcelle telle qu'elle était délimitée au début du 19ème siècle, 44 ans après l'achèvement de la bâtisse.
+            </p>
+            <img src="Cadastre/5 3 P 365 21 Section E. - (1825)/FRAD067_0119N_UM2360.jpg" alt="Plan cadastral napoléonien de 1825">
+            <a href="https://archives67.alsace.eu/ark:/78665/1185513.1489972/img:FRAD067_0119NUM2360" target="_blank" class="btn-link">Consulter le document original aux Archives</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 - Mathéo Angst. Créé pour documenter l'histoire de notre maison familiale.</p>
+    </footer>
+
+</body>
+</html>
