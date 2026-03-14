@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Héritage Fleuri - 18 Rue Principale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette Ancien, Bois et Or conservée */
+            --bg-dark: #0f0c0a;
+            --wood-card: rgba(36, 25, 20, 0.7);
+            --wood-border: #4a3525;
+            --gold-bright: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --text-light: #e8dfce;
+            --text-muted: #a89f91;
+            --flower-accent: rgba(212, 175, 55, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-light);
+            background-color: var(--bg-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            color: var(--gold-bright);
+        }
+
+        /* En-tête (Hero Section) - Prévoyez une de vos plus belles photos de fleurs en fond */
+        header {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(15, 12, 10, 0.7), rgba(15, 12, 10, 1)), url('fleur-principale.jpg') center/cover no-repeat;
+            background-attachment: fixed;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            background: rgba(15, 12, 10, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 50px 80px;
+            border: 1px solid var(--gold-bright);
+            border-radius: 4px;
+            box-shadow: 0 0 30px var(--gold-glow);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: rgba(15, 12, 10, 0.95);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--wood-border);
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold-bright);
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        /* Section Histoire d'Alfred */
+        section {
+            padding: 80px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .story-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background: var(--wood-card);
+            border: 1px solid var(--wood-border);
+            border-radius: 4px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: inset 0 0 30px var(--flower-accent), 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .story-text {
+            flex: 1;
+        }
+
+        .story-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .story-text p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .story-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Galerie des fleurs (Grid style maçonnerie pour beaucoup de photos) */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: var(--gold-bright);
+            margin: 20px auto 0;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            grid-auto-flow: dense;
+        }
+
+        .photo-item {
+            position: relative;
+            border: 1px solid var(--wood-border);
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--wood-card);
+            transition: all 0.4s ease;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        /* Hauteurs variées pour dynamiser l'affichage des nombreuses photos */
+        .tall { grid-row: span 2; }
+        .wide { grid-column: span 2; }
+
+        .photo-item:hover {
+            border-color: var(--gold-bright);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6), 0 0 15px var(--gold-glow);
+            z-index: 2;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #080605;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--wood-border);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            margin-top: 50px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 900px) {
+            .story-container {
+                flex-direction: column;
+                padding: 30px;
+            }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content { padding: 30px 20px; }
+            .wide { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hero-content">
+            <h1>L'Écrin Fleuri</h1>
+            <p>La passion d'Alfred Emile Goetzmann</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">← Retour à l'Histoire</a></li>
+            <li><a href="#histoire-fleurs" class="active">L'Héritage d'Alfred</a></li>
+            <li><a href="#galerie-fleurs">L'Album de la Bâtisse</a></li>
+        </ul>
+    </nav>
+
+    <section id="histoire-fleurs">
+        <div class="story-container">
+            <div class="story-text">
+                <h2>La Renaissance par les Fleurs</h2>
+                <p>Si les bâtisseurs de 1781 ont donné à la maison son ossature robuste et sa prestance architecturale, c'est à la troisième génération recensée qu'elle doit sa parure la plus éclatante. À l'heure de sa retraite, Alfred Emile Goetzmann, né en 1949, a choisi de dédier son temps libre à sublimer le domaine familial.</p>
+                <p>Passionné par la terre, il a patiemment transformé les abords de la demeure et ses balcons en un véritable tableau vivant. Géraniums tombants, compositions florales traditionnelles alsaciennes et touches de couleurs vives sont venus habiller les colombages anciens.</p>
+                <p>Ce travail méticuleux des saisons a créé un contraste saisissant : la noblesse sombre des poutres séculaires s'alliant à la délicatesse éphémère des pétales. Voici l'hommage photographique à cet art de vivre qui a redonné vie à notre maison historique.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="galerie-fleurs">
+        <h2 class="section-title">L'Album Fleuri</h2>
+        
+        <div class="photo-grid">
+            
+            <div class="photo-item tall">
+                <img src="photo1.jpg" alt="Façade fleurie de la maison">
+            </div>
+
+            <div class="photo-item">
+                <img src="photo2.jpg" alt="Détails des géraniums aux fenêtres">
+            </div>
+
+            <div class="photo-item wide">
+                <img src="photo3.jpg" alt="Vue d'ensemble du jardin et des colombages">
+            </div>
+
+            <div class="photo-item">
+                <img src="photo4.jpg" alt="Les fleurs d'Alfred Goetzmann">
+            </div>
+
+            <div class="photo-item tall">
+                <img src="photo5.jpg" alt="La cour fleurie">
+            </div>
+
+            <div class="photo-item">
+                <img src="photo6.jpg" alt="L'entrée de la maison en été">
+            </div>
+
+            </div>
+    </section>
+
+    <footer>
+        <p>Projet de Mémoire et de Transmission — L'héritage d'Alfred Emile Goetzmann documenté par Mathéo Angst.</p>
+    </footer>
+
+</body>
+</html>
