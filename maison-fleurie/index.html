@@ -1,306 +1,427 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Héritage Fleuri - 18 Rue Principale</title>
+    <title>L'histoire de la Maison à Colombages avec Nid de Cigogne de Hermerswiller</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
+        /* Variables de couleurs */
         :root {
-            /* Palette Ancien, Bois et Or conservée */
             --bg-dark: #0f0c0a;
-            --wood-card: rgba(36, 25, 20, 0.7);
             --wood-border: #4a3525;
             --gold-bright: #d4af37;
             --gold-glow: rgba(212, 175, 55, 0.3);
             --text-light: #e8dfce;
-            --text-muted: #a89f91;
-            --flower-accent: rgba(212, 175, 55, 0.05);
+            --text-dark: #31241a;
+            --text-muted-dark: #a89f91;
+            --text-muted-light: #704f36;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
             color: var(--text-light);
             background-color: var(--bg-dark);
-            line-height: 1.7;
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
-            color: var(--gold-bright);
-        }
-
-        /* En-tête (Hero Section) - Prévoyez une de vos plus belles photos de fleurs en fond */
-        header {
-            position: relative;
-            height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(to bottom, rgba(15, 12, 10, 0.7), rgba(15, 12, 10, 1)), url('fleur-principale.jpg') center/cover no-repeat;
-            background-attachment: fixed;
-            padding: 0 20px;
-        }
-
-        .hero-content {
-            background: rgba(15, 12, 10, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 50px 80px;
-            border: 1px solid var(--gold-bright);
-            border-radius: 4px;
-            box-shadow: 0 0 30px var(--gold-glow);
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px var(--gold-glow);
-        }
-
-        .hero-content p {
-            font-size: 1.4rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            color: var(--text-light);
-            letter-spacing: 1px;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: rgba(15, 12, 10, 0.95);
-            padding: 20px 0;
-            position: sticky;
+        /* --- EN-TÊTE FIXE --- */
+        .site-header {
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid var(--wood-border);
-            backdrop-filter: blur(10px);
-        }
-
-        nav ul {
-            list-style: none;
+            padding: 20px 50px;
             display: flex;
-            justify-content: center;
-            gap: 50px;
-            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(15, 12, 10, 0.9) 0%, rgba(15, 12, 10, 0) 100%);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--wood-border);
         }
 
-        nav a {
+        .back-link {
             color: var(--text-light);
             text-decoration: none;
             text-transform: uppercase;
             font-size: 0.9rem;
             letter-spacing: 2px;
-            transition: all 0.3s;
+            font-weight: 600;
+            transition: color 0.3s;
         }
 
-        nav a:hover, nav a.active {
+        .back-link:hover {
             color: var(--gold-bright);
             text-shadow: 0 0 8px var(--gold-glow);
         }
 
-        /* Section Histoire d'Alfred */
+        /* --- SECTIONS ET ANIMATIONS SCROLL-DRIVEN --- */
         section {
-            padding: 80px 10%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .story-container {
             display: flex;
             align-items: center;
-            gap: 50px;
-            background: var(--wood-card);
-            border: 1px solid var(--wood-border);
-            border-radius: 4px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: inset 0 0 30px var(--flower-accent), 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .story-text {
-            flex: 1;
-        }
-
-        .story-text h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-        }
-
-        .story-text p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        .story-text p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Galerie des fleurs (Grid style maçonnerie pour beaucoup de photos) */
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            letter-spacing: 1px;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 2px;
-            background-color: var(--gold-bright);
-            margin: 20px auto 0;
-        }
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            grid-auto-flow: dense;
-        }
-
-        .photo-item {
+            gap: 36px;
+            height: 100vh;
+            padding: 24px 10%;
+            
+            view-timeline: --section;
             position: relative;
-            border: 1px solid var(--wood-border);
-            border-radius: 4px;
-            overflow: hidden;
-            background: var(--wood-card);
-            transition: all 0.4s ease;
+            
+            --img-width: 40vw;
+            --img-height: calc(var(--img-width) * 1.1);
         }
 
-        .photo-item img {
+        /* Gestion de l'ordre de superposition (z-index) et des couleurs */
+        section:nth-child(1)  { background-color: #0f0c0a; z-index: 20; }
+        section:nth-child(2)  { background-color: #2c2830; z-index: 19; }
+        section:nth-child(3)  { background-color: #cbd2de; z-index: 18; }
+        section:nth-child(4)  { background-color: #cbe2e8; z-index: 17; }
+        section:nth-child(5)  { background-color: #cce3d5; z-index: 16; }
+        section:nth-child(6)  { background-color: #e2e8cc; z-index: 15; }
+        section:nth-child(7)  { background-color: #faefd4; z-index: 14; }
+        section:nth-child(8)  { background-color: #fadfd4; z-index: 13; }
+        section:nth-child(9)  { background-color: #fad4d4; z-index: 12; }
+        section:nth-child(10) { background-color: #e8cce0; z-index: 11; }
+        section:nth-child(11) { background-color: #dacce8; z-index: 10; }
+        section:nth-child(12) { background-color: #cccce8; z-index: 9;  }
+        section:nth-child(13) { background-color: #ccd8e8; z-index: 8;  }
+        section:nth-child(14) { background-color: #dce1e6; z-index: 7;  }
+        section:nth-child(15) { background-color: #d5e6db; z-index: 6;  }
+        section:nth-child(16) { background-color: #f7ebd5; z-index: 5;  }
+        section:nth-child(17) { background-color: #f7dfd5; z-index: 4;  }
+        section:nth-child(18) { background-color: #f7d5d5; z-index: 3;  }
+        section:nth-child(19) { background-color: #f5f0e6; z-index: 2;  }
+        section:nth-child(20) { background-color: #ffffff; z-index: 1;  }
+
+        /* Conteneur de l'image fixé */
+        section .img-box {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            right: 8%;
+            width: var(--img-width);
+            height: var(--img-height);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animation Wipe sur l'image avec affichage intégral */
+        section img {
+            display: block;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease;
+            object-fit: contain; /* L'image s'affiche en entier */
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+            
+            animation: wipe linear both;
+            animation-timeline: --section;
+            
+            --gap: calc((100% - var(--img-height)) / 2);
+            animation-range: exit var(--gap) exit calc(100% - var(--gap));
         }
 
-        /* Hauteurs variées pour dynamiser l'affichage des nombreuses photos */
-        .tall { grid-row: span 2; }
-        .wide { grid-column: span 2; }
-
-        .photo-item:hover {
-            border-color: var(--gold-bright);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.6), 0 0 15px var(--gold-glow);
-            z-index: 2;
+        @keyframes wipe {
+            0% { clip-path: inset(0 0 0 0); }
+            100% { clip-path: inset(0 0 100% 0); }
         }
 
-        .photo-item:hover img {
-            transform: scale(1.05);
+        /* --- TEXTE ET CONTENU --- */
+        .content {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 24px;
         }
 
-        /* Footer */
-        footer {
-            background-color: #080605;
-            color: var(--text-muted);
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid var(--wood-border);
+        .content .title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            margin-top: 50px;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--gold-bright);
+            text-shadow: 0 0 15px var(--gold-glow);
+            text-transform: uppercase;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .content .desc {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: var(--text-muted-dark);
         }
 
-        /* Responsive */
-        @media screen and (max-width: 900px) {
-            .story-container {
-                flex-direction: column;
-                padding: 30px;
+        /* Ajustements automatiques du texte pour les fonds clairs (Sections 3 à 20) */
+        section:nth-child(n+3) .content .title { 
+            text-shadow: none; 
+            color: #aa8628; 
+        }
+        section:nth-child(n+3) .content .desc { 
+            color: var(--text-muted-light); 
+        }
+
+        /* Responsive Design pour Mobile & Tablettes */
+        @media screen and (max-width: 992px) {
+            .site-header {
+                padding: 15px 20px;
             }
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-content { padding: 30px 20px; }
-            .wide { grid-column: span 1; }
+            
+            section {
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 100px 5% 20px 5%;
+                --img-width: 90vw;
+                --img-height: 50vh;
+            }
+
+            .content {
+                width: 100%;
+                text-align: center;
+                z-index: 100;
+            }
+
+            .content .title {
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+            }
+
+            .content .desc {
+                font-size: 1.1rem;
+            }
+
+            section .img-box {
+                right: 0;
+                left: 0;
+                top: auto;
+                bottom: 5vh;
+            }
         }
     </style>
 </head>
-<body>
 
-    <header>
-        <div class="hero-content">
-            <h1>L'Écrin Fleuri</h1>
-            <p>La passion d'Alfred Emile Goetzmann</p>
-        </div>
+<body>
+    
+    <header class="site-header">
+        <a href="../index.html" class="back-link">← Retour à l'Histoire</a>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">← Retour à l'Histoire</a></li>
-            <li><a href="#histoire-fleurs" class="active">L'Héritage d'Alfred</a></li>
-            <li><a href="#galerie-fleurs">L'Album de la Bâtisse</a></li>
-        </ul>
-    </nav>
-
-    <section id="histoire-fleurs">
-        <div class="story-container">
-            <div class="story-text">
-                <h2>La Renaissance par les Fleurs</h2>
-                <p>Si les bâtisseurs de 1781 ont donné à la maison son ossature robuste et sa prestance architecturale, c'est à la troisième génération recensée qu'elle doit sa parure la plus éclatante. À l'heure de sa retraite, Alfred Emile Goetzmann, né en 1949, a choisi de dédier son temps libre à sublimer le domaine familial.</p>
-                <p>Passionné par la terre, il a patiemment transformé les abords de la demeure et ses balcons en un véritable tableau vivant. Géraniums tombants, compositions florales traditionnelles alsaciennes et touches de couleurs vives sont venus habiller les colombages anciens.</p>
-                <p>Ce travail méticuleux des saisons a créé un contraste saisissant : la noblesse sombre des poutres séculaires s'alliant à la délicatesse éphémère des pétales. Voici l'hommage photographique à cet art de vivre qui a redonné vie à notre maison historique.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="galerie-fleurs">
-        <h2 class="section-title">L'Album Fleuri</h2>
+    <main>
         
-        <div class="photo-grid">
-            
-            <div class="photo-item tall">
-                <img src="photo1.jpg" alt="Façade fleurie de la maison">
+        <section>
+            <div class="content">
+                <div class="title">I. Traces du Passé</div>
+                <div class="desc">Un précieux cliché en noir et blanc capturant l'essence brute de la maison à colombages. L'architecture massive s'impose dans le paysage bien avant l'explosion florale de la cour.</div>
             </div>
-
-            <div class="photo-item">
-                <img src="photo2.jpg" alt="Détails des géraniums aux fenêtres">
+            <div class="img-box">
+                <img src="phtos/1.jpg" alt="Fleur 1">
             </div>
+        </section>
 
-            <div class="photo-item wide">
-                <img src="photo3.jpg" alt="Vue d'ensemble du jardin et des colombages">
+        <section>
+            <div class="content">
+                <div class="title">II. Veilleur du Toit</div>
+                <div class="desc">Une vue ancienne mettant en valeur la rigueur géométrique de la charpente. Tout en haut, le nid de cigogne veille déjà majestueusement sur la demeure historique.</div>
             </div>
-
-            <div class="photo-item">
-                <img src="photo4.jpg" alt="Les fleurs d'Alfred Goetzmann">
+            <div class="img-box">
+                <img src="phtos/2.jpg" alt="Fleur 2">
             </div>
+        </section>
 
-            <div class="photo-item tall">
-                <img src="photo5.jpg" alt="La cour fleurie">
+        <section>
+            <div class="content">
+                <div class="title">III. L'Éveil des Couleurs</div>
+                <div class="desc">Une archive colorisée témoignant des premières teintes originelles de la façade. Les aménagements extérieurs et la végétation commencent à y trouver doucement leur place.</div>
             </div>
-
-            <div class="photo-item">
-                <img src="photo6.jpg" alt="L'entrée de la maison en été">
+            <div class="img-box">
+                <img src="phtos/3.jpg" alt="Fleur 3">
             </div>
+        </section>
 
+        <section>
+            <div class="content">
+                <div class="title">IV. L'Engagement</div>
+                <div class="desc">Cette brochure illustre le profond engagement de la famille dans l'embellissement du village. Une passion pour la nature partagée avec la communauté et les visiteurs.</div>
             </div>
-    </section>
+            <div class="img-box">
+                <img src="phtos/4.png" alt="Fleur 4">
+            </div>
+        </section>
 
-    <footer>
-        <p>Projet de Mémoire et de Transmission — L'héritage d'Alfred Emile Goetzmann documenté par Mathéo Angst.</p>
-    </footer>
+        <section>
+            <div class="content">
+                <div class="title">V. L'Aventure Botanique</div>
+                <div class="desc">Les documents officiels du concours floral. Ils symbolisent la participation active et la reconnaissance régionale du travail minutieux réalisé autour de la propriété.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/5.png" alt="Fleur 5">
+            </div>
+        </section>
 
+        <section>
+            <div class="content">
+                <div class="title">VI. La Consécration</div>
+                <div class="desc">Le diplôme du 2e Grand Trophée Floral de 1998. La plus belle des consécrations pour le dévouement d'Alfred Goetzmann, récompensé pour la splendeur de ses géraniums.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/6.jpg" alt="Fleur 6">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">VII. Souvenir d'Alsace</div>
+                <div class="desc">La bâtisse s'est érigée en véritable emblème régional, immortalisée sur de nombreuses cartes postales pour partager la beauté de son architecture typique et de sa floraison.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/7.jpg" alt="Fleur 7">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">VIII. Le Foyer</div>
+                <div class="desc">Texte et photos à venir.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/8.jpg" alt="Fleur 8" onerror="this.style.display='none'">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">IX. La Passion</div>
+                <div class="desc">Texte et photos à venir.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/9.jpg" alt="Fleur 9" onerror="this.style.display='none'">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">X. Le Maître des Lieux</div>
+                <div class="desc">Une promenade intemporelle dans le jardin luxuriant. L'imposante verdure encadre parfaitement le chemin pavé menant vers la cour de la demeure.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/10.jpg" alt="Fleur 10">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XI. L'Allée Pavée</div>
+                <div class="desc">L'entrée du domaine est marquée par un ancien pilier de pierre taillée. L'allée, parfaitement entretenue, est une invitation à découvrir le cœur fleuri de la propriété.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/11.jpg" alt="Fleur 11">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XII. Cascade Éclatante</div>
+                <div class="desc">Un ruissellement spectaculaire de fleurs rouges et jaunes. Leurs couleurs vives offrent un contraste saisissant avec la blancheur des murs et le bois sombre des balcons.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/12.jpg" alt="Fleur 12">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XIII. L'Ombre du Grand Arbre</div>
+                <div class="desc">La nature environnante enlace doucement la bâtisse. Le grand arbre feuillu offre une fraîcheur bienvenue lors des chaudes journées estivales d'Alsace.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/13.jpg" alt="Fleur 13">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XIV. Le Muret Fleuri</div>
+                <div class="desc">Aucun détail n'est laissé au hasard. Le long et robuste muret de pierre bordant la rue est méticuleusement aménagé pour offrir aux passants une longue symphonie florale.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/14.jpg" alt="Fleur 14">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XV. L'Équilibre Parfait</div>
+                <div class="desc">Sous l'azur d'un ciel d'été, l'architecture traditionnelle de la maison fusionne avec son environnement végétal pour atteindre un équilibre esthétique parfait.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/15.jpg" alt="Fleur 15">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XVI. La Parure aux Fenêtres</div>
+                <div class="desc">Chaque rebord de fenêtre devient le support d'une œuvre florale. Les géraniums tombants soulignent avec grâce le rythme vertical des anciens colombages de la façade.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/16.jpg" alt="Fleur 16">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XVII. L'Héritage</div>
+                <div class="desc">Texte et photos à venir.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/17.jpg" alt="Fleur 17" onerror="this.style.display='none'">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XVIII. Outils du Passé</div>
+                <div class="desc">Les anciens outils agricoles et charrettes de la ferme trouvent ici une seconde vie, ingénieusement transformés en de magnifiques jardinières rustiques gorgées de couleurs.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/18.jpg" alt="Fleur 18">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XIX. La Cour Intérieure</div>
+                <div class="desc">Le cœur battant de la propriété. Un écrin de calme et de beauté, préservé au fil des années, qui continue d'honorer dignement les savoir-faire et traditions de nos aïeux.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/19.jpg" alt="Fleur 19">
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <div class="title">XX. L'Éternité</div>
+                <div class="desc">Texte et photos à venir.</div>
+            </div>
+            <div class="img-box">
+                <img src="phtos/20.jpg" alt="Fleur 20" onerror="this.style.display='none'">
+            </div>
+        </section>
+
+    </main>
+
+    <script src='https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js'></script>
+    
 </body>
 </html>
