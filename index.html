@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison à Colombages avec Nid de Cigogne - Par Mathéo Angst</title>
+    <meta name="description" content="Découvrez l'histoire et la généalogie d'une maison à colombages traditionnelle située à Hermerswiller. Un patrimoine familial préservé à travers les siècles.">
+    <title>L'histoire de la Maison à Colombages avec Nid de Cigogne de Hermerswiller - Par Mathéo Angst</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
@@ -64,19 +65,13 @@
         }
 
         .hero-content h1 {
-            font-size: 4.5rem;
-            margin-bottom: 10px;
+            font-size: 3.8rem;
+            margin-bottom: 20px;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-shadow: 0 0 10px var(--gold-glow);
             word-wrap: break-word;
-        }
-
-        .hero-content p {
-            font-size: 1.4rem;
-            color: var(--text-light);
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            line-height: 1.2;
         }
 
         .hero-content .date-badge {
@@ -93,7 +88,7 @@
 
         nav {
             background-color: rgba(15, 12, 10, 0.95);
-            padding: 20px 0;
+            padding: 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -101,16 +96,34 @@
             backdrop-filter: blur(10px);
         }
 
-        nav ul {
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--wood-card);
+        }
+
+        .menu-toggle .bar {
+            display: block;
+            width: 30px;
+            height: 3px;
+            margin: 6px auto;
+            background-color: var(--gold-bright);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
             list-style: none;
             display: flex;
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
-            padding: 0 10px;
+            padding: 20px 10px;
+            margin: 0;
         }
 
-        nav a {
+        .nav-links a {
             color: var(--text-light);
             text-decoration: none;
             text-transform: uppercase;
@@ -118,9 +131,10 @@
             letter-spacing: 2px;
             transition: all 0.3s;
             text-align: center;
+            display: block;
         }
 
-        nav a:hover {
+        .nav-links a:hover {
             color: var(--gold-bright);
             text-shadow: 0 0 8px var(--gold-glow);
         }
@@ -354,7 +368,6 @@
             box-shadow: 0 0 20px var(--gold-glow);
         }
 
-        /* Cadastre Section */
         .cadastre-full {
             margin-top: 80px;
             text-align: center;
@@ -378,7 +391,7 @@
             height: auto;
             border: 2px solid var(--gold-bright);
             margin-bottom: 20px;
-            cursor: zoom-in;
+            cursor: pointer;
             transition: transform 0.3s ease;
         }
         
@@ -433,8 +446,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: rgba(10, 8, 7, 0.95);
-            backdrop-filter: blur(5px);
+            background-color: rgba(10, 8, 7, 0.98);
         }
 
         .modal-content-wrapper {
@@ -453,10 +465,43 @@
         #zoomedImage {
             max-width: 90%;
             max-height: 90%;
-            transition: transform 0.1s ease-out;
+            transition: transform 0.2s ease-out;
             transform-origin: center center;
             box-shadow: 0 0 30px rgba(0,0,0,0.8);
             border: 2px solid var(--gold-bright);
+        }
+
+        /* Boutons de Zoom et de fermeture */
+        .zoom-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2002;
+            display: flex;
+            gap: 20px;
+        }
+
+        .zoom-controls button {
+            background-color: rgba(36, 25, 20, 0.9);
+            color: var(--gold-bright);
+            border: 2px solid var(--gold-bright);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .zoom-controls button:hover {
+            background-color: var(--gold-bright);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--gold-glow);
         }
 
         .close-modal {
@@ -464,7 +509,7 @@
             top: 15px;
             right: 20px;
             color: var(--gold-bright);
-            font-size: 40px;
+            font-size: 50px;
             font-weight: bold;
             cursor: pointer;
             z-index: 2001;
@@ -479,11 +524,11 @@
 
         .zoom-instructions {
             position: absolute;
-            bottom: 30px;
+            top: 30px;
             left: 50%;
             transform: translateX(-50%);
             color: var(--text-light);
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.8);
             padding: 10px 20px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -512,6 +557,21 @@
 
         /* MEDIA QUERIES RESPONSIVE (TÉLÉPHONES ET TABLETTES) */
         @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
             section {
                 padding: 60px 5%;
             }
@@ -524,10 +584,6 @@
                 font-size: 2.2rem;
             }
 
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-
             .hero-content .date-badge {
                 font-size: 1.2rem;
                 padding: 6px 15px;
@@ -536,12 +592,6 @@
             .section-title {
                 font-size: 2rem;
                 margin-bottom: 40px;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 15px;
-                align-items: center;
             }
 
             .timeline::after {
@@ -600,6 +650,12 @@
                 display: block;
                 width: 100%;
             }
+
+            .zoom-controls button {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+            }
         }
     </style>
 </head>
@@ -607,20 +663,24 @@
 
     <header>
         <div class="hero-content">
-            <h1>Maison à Colombages avec Nid de Cigogne</h1>
-            <p>Histoire d'un patrimoine familial</p>
+            <h1>L'histoire de la Maison à Colombages avec Nid de Cigogne de Hermerswiller</h1>
             <p style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px;">Par Mathéo Angst</p>
             <div class="date-badge">Achevée en 1781</div>
         </div>
     </header>
 
     <nav>
-        <ul>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="nav-links" id="nav-links">
             <li><a href="#genealogie">La Lignée</a></li>
             <li><a href="#cadastre">Le Cadastre</a></li>
             <li><a href="#photos-contemporaines">Mes Photos</a></li>
             <li><a href="#lettres-anciennes">Lettres & Archives</a></li>
-            <li><a href="maison-fleurie/index.html">L'Héritage Fleuri</a></li>
+            <li><a href="maison-fleurie/index.html">Toute l'histoire</a></li>
         </ul>
     </nav>
 
@@ -635,7 +695,6 @@
                 <div class="content-timeline">
                     <span>Génération 1</span>
                     <h3>Mathéo Angst</h3>
-                    <p>Né le 11 juillet 2007</p>
                 </div>
             </div>
 
@@ -643,7 +702,6 @@
                 <div class="content-timeline">
                     <span>Génération 2</span>
                     <h3>Manuela Goetzmann</h3>
-                    <p>Née le 3 février 1979</p>
                 </div>
             </div>
 
@@ -651,7 +709,29 @@
                 <div class="content-timeline">
                     <span>Génération 3</span>
                     <h3>Alfred Emile Goetzmann</h3>
-                    <p>Né le 14 mars 1949</p>
+                </div>
+            </div>
+
+            <div class="container-timeline right">
+                <div class="content-timeline">
+                    <span>Génération 4</span>
+                    <h3>Emile Goetzmann</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">Né à Rittershoffen, a épousé Berthe Schneider.</p>
+                </div>
+            </div>
+
+            <div class="container-timeline left">
+                <div class="content-timeline">
+                    <span>Génération 5</span>
+                    <h3>Dorothée Albert</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">A épousé M. Schneider.</p>
+                </div>
+            </div>
+
+            <div class="container-timeline right">
+                <div class="content-timeline">
+                    <span>Génération 6</span>
+                    <h3>Albert Georges</h3>
                 </div>
             </div>
 
@@ -671,32 +751,15 @@
             <p style="margin-bottom: 10px; color: var(--text-muted); font-size: 1.1rem;">
                 Le document fondateur de notre recherche foncière. Il permet de visualiser notre parcelle telle qu'elle était délimitée au début du 19ème siècle, 44 ans après l'achèvement de la bâtisse.
             </p>
-            <span class="image-hint">Appuyez sur les plans pour zoomer en plein écran</span>
+            <span class="image-hint">Appuyez sur les plans pour les examiner en détail</span>
             
             <img class="zoomable" src="Cadastre/5 3 P 365 21 Section E. - (1825)/FRAD067_0119NUM2360.jpg" alt="Plan cadastral napoléonien de 1825 - Section E">
 
             <div class="cadastre-grid">
-                
-                <div class="cadastre-item">
-                    <img class="zoomable" src="Cadastre/1 3 P 365 22 Tableau d'assemblage. - (1825)/FRAD067_0119NUM2361.jpg" alt="Tableau d'assemblage">
-                    <h4>Tableau d'assemblage</h4>
-                </div>
-
-                <div class="cadastre-item">
-                    <img class="zoomable" src="Cadastre/2 3 P 365 23 Section A ; section B. - (1825)/FRAD067_0119NUM2362.jpg" alt="Section A et B">
-                    <h4>Sections A et B</h4>
-                </div>
-
                 <div class="cadastre-item">
                     <img class="zoomable" src="Cadastre/3 3 P 365 24 Section C. - (1825)/FRAD067_0119NUM2363.jpg" alt="Section C">
                     <h4>Section C</h4>
                 </div>
-
-                <div class="cadastre-item">
-                    <img class="zoomable" src="Cadastre/4 3 P 365 25 Section D. - (1825)/FRAD067_0119NUM2364.jpg" alt="Section D">
-                    <h4>Section D</h4>
-                </div>
-
             </div>
         </div>
     </section>
@@ -736,7 +799,7 @@
         </div>
 
         <div style="text-align: center; margin-top: 60px;">
-            <a href="maison-fleurie/index.html" class="btn-archives" style="font-size: 1.4rem; padding: 15px 40px;">Découvrir l'Héritage Fleuri d'Alfred Goetzmann</a>
+            <a href="maison-fleurie/index.html" class="btn-archives" style="font-size: 1.4rem; padding: 15px 40px;">Toute l'histoire</a>
         </div>
 
     </section>
@@ -799,18 +862,43 @@
 
     <div id="imageModal" class="modal">
         <span class="close-modal">&times;</span>
-        <div class="zoom-instructions">Pincez pour zoomer sur mobile, ou utilisez la molette sur ordinateur. Glissez pour explorer.</div>
+        <div class="zoom-instructions">Utilisez les boutons + et - pour zoomer. Glissez pour explorer le plan.</div>
+        
         <div class="modal-content-wrapper">
             <img id="zoomedImage" src="" alt="Plan en plein écran">
+        </div>
+
+        <div class="zoom-controls">
+            <button id="btnZoomOut">-</button>
+            <button id="btnZoomIn">+</button>
         </div>
     </div>
 
     <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
         const modal = document.getElementById("imageModal");
         const img = document.getElementById("zoomedImage");
         const triggers = document.querySelectorAll(".zoomable");
         const closeBtn = document.querySelector(".close-modal");
         const wrapper = document.querySelector(".modal-content-wrapper");
+        
+        const btnZoomIn = document.getElementById("btnZoomIn");
+        const btnZoomOut = document.getElementById("btnZoomOut");
 
         let scale = 1;
         let panning = false;
@@ -818,7 +906,6 @@
         let pointY = 0;
         let start = { x: 0, y: 0 };
 
-        // Ouvrir l'image en grand (boucle sur toutes les images avec la classe zoomable)
         triggers.forEach(trigger => {
             trigger.onclick = function() {
                 modal.style.display = "block";
@@ -830,29 +917,22 @@
             }
         });
 
-        // Fermer la fenêtre
         closeBtn.onclick = function() {
             modal.style.display = "none";
         }
 
-        // Gestion du Zoom (Molette de la souris pour PC)
-        wrapper.onwheel = function(e) {
-            e.preventDefault();
-            let delta = (e.wheelDelta ? e.wheelDelta : -e.deltaY);
-            if (delta > 0) {
-                scale *= 1.2; // Zoom avant
-            } else {
-                scale /= 1.2; // Zoom arrière
-            }
-            
-            // Limites du zoom
-            if (scale < 0.5) scale = 0.5;
+        btnZoomIn.onclick = function() {
+            scale *= 1.3;
             if (scale > 15) scale = 15;
-            
             setTransform();
         }
 
-        // Gestion du déplacement (Drag & Pan pour PC)
+        btnZoomOut.onclick = function() {
+            scale /= 1.3;
+            if (scale < 0.5) scale = 0.5;
+            setTransform();
+        }
+
         wrapper.onmousedown = function(e) {
             e.preventDefault();
             start = { x: e.clientX - pointX, y: e.clientY - pointY };
@@ -875,7 +955,6 @@
             setTransform();
         }
 
-        // Support basique pour écran tactile (Déplacement)
         wrapper.addEventListener('touchstart', function(e) {
             if(e.touches.length === 1) {
                 start = { x: e.touches[0].clientX - pointX, y: e.touches[0].clientY - pointY };
@@ -885,7 +964,7 @@
 
         wrapper.addEventListener('touchmove', function(e) {
             if(e.touches.length === 1 && panning) {
-                e.preventDefault();
+                e.preventDefault(); 
                 pointX = (e.touches[0].clientX - start.x);
                 pointY = (e.touches[0].clientY - start.y);
                 setTransform();
